@@ -51,3 +51,55 @@
 </body>
 
 </html>
+
+const url = "https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json";
+
+function init() {
+  d3.json(url).then((data) => {
+    // Grab the dropdown element
+    let dropdown = d3.select("#selDataset");
+
+    data.names.forEach((id) => {
+      dropdown.append("option")
+              .text(id)
+              .property("value", id);
+    });
+
+    let firstSample = data.names[0];
+    buildBarChart(firstSample, data);
+  });
+}
+
+function buildBarChart(sample, data) {
+
+  let sampleObj = data.samples.filter((s) => s.id === sample)[0];
+
+  let sampleValues = sampleObj.sample_values.slice(0, 10).reverse();
+  let otuIds        = sampleObj.otu_ids.slice(0, 10).reverse();
+  let otuLabels     = sampleObj.otu_labels.slice(0, 10).reverse();
+
+  let yticks = otuIds.map((id) => `OTU ${id}`);
+
+  let trace = {
+    x: sampleValues,
+    y: yticks,
+    text: otuLabels,
+    type: "bar",
+    orientation: "h"
+  };
+  let layout = {
+    title: "Top 10 OTUs Found",
+    margin: { t: 50, l: 100 }
+  };
+
+  Plotly.newPlot("bar", [trace], layout);
+}
+
+function optionChanged(newSample) {
+  // Fetch new data each time a new sample is selected
+  d3.json(url).then((data) => {
+    buildBarChart(newSample, data);
+  });
+}
+
+init();
