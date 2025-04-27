@@ -11,5 +11,6 @@ The dataset reveals that a small handful of microbial species (also called opera
 - **Horizontal Bar Chart**: Top 10 OTUs for the selected sample  
 - **Bubble Chart**: All OTUs sized by sample values and colored by OTU ID  
 - **Metadata Panel**: Demographic info for the selected subject
--
-- ![Screenshot 2025-04-27 at 5 39 00 PM](https://github.com/user-attachments/assets/4e562be7-bf43-42ca-8d60-cd1a3dcf0c9d)
+
+  
+![Screenshot 2025-04-27 at 5 39 00 PM](https://github.com/user-attachments/assets/4e562be7-bf43-42ca-8d60-cd1a3dcf0c9d)
